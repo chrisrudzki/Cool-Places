@@ -1,33 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import mapboxgl from 'mapbox-gl'
 
 function App() {
   const [count, setCount] = useState(0)
 
+  useEffect(() => {
+    mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXNydWR6a2kiLCJhIjoiY21jczlybHZnMHZrODJrcTIyaXpyZnUxNSJ9.iNC1iYW4Ra5qTmee9BCluA';
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-74.5, 40], // optional: initial map center [lng, lat]
+      zoom: 9, // optional: initial zoom level
+    });
+  }, [])
+
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Cool places</h1>
+      <div id="map" style={{ width: '100%', height: '500px' }}></div>
     </>
   )
 }
