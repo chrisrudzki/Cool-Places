@@ -21,7 +21,7 @@ export default function App() {
 
     return (
     <>
-        {curStartDisplay ? <StartScreen/> : undefined}
+        {!curStartDisplay ? <StartScreen/> : undefined}
         <h1>HEAaaSSSS!!</h1>
         <div id="map" style={{ width: '100%', height: '500px' }}></div>
     </>
