@@ -8,7 +8,7 @@ import StartScreen from "./components/StartScreen.jsx"
 export default function App() {
 
     const [curStartDisplay, setCurStartDisplay] = useState(true);
-
+    
     useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2hyaXNydWR6a2kiLCJhIjoiY21jczlybHZnMHZrODJrcTIyaXpyZnUxNSJ9.iNC1iYW4Ra5qTmee9BCluA';
     const map = new mapboxgl.Map({
@@ -21,7 +21,7 @@ export default function App() {
 
     return (
     <>
-        {!curStartDisplay ? <StartScreen/> : undefined}
+        {curStartDisplay ? <StartScreen/> : undefined}
         <h1>HEAaaSSSS!!</h1>
         <div id="map" style={{ width: '100%', height: '500px' }}></div>
     </>
