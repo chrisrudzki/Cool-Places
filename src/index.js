@@ -1,7 +1,24 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-const firebaseApp = initializeApp ({ 
+// import { 
+//   hideLoginError, 
+//   showLoginState, 
+//   showLoginForm, 
+//   showApp, 
+//   showLoginError, 
+//   btnLogin,
+//   btnSignup,
+//   btnLogout
+// } from './ui'
+
+import { getAuth,
+    onAuthStateChanged,
+signOut,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+connectAuthEmulator } from "firebase/auth";
+
+const firebaseApp = initializeApp ({
   apiKey: "AIzaSyCAUd7eHodqA4wO4MVZCjp3Y3I9OVDu_Mo",
   authDomain: "cool-places-84e55.firebaseapp.com",
   projectId: "cool-places-84e55",
@@ -12,10 +29,27 @@ const firebaseApp = initializeApp ({
 
 const auth = getAuth(firebaseApp);
 
-onAuthStateChanged(auth, user => {
-    if(user != null){
-        console.log("user");
-    } else {
-        console.log("none");
-    }
-});
+export default auth;
+
+
+//connectAuthEmulator(auth, "http://localhost:9099");
+// const loginEmailPassword = async () => {
+//     const loginEmail = txtEmail.value;
+//     const loginPassword = txtPassword.value;
+//     const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
+//     console.log(userCredential.user);
+// }
+
+//btnLogin.addEventListener("click", loginEmailPassword);
+
+//figure out how to hookup react to this functionality!
+
+
+
+// onAuthStateChanged(auth, user => {
+//     if(user != null){
+//         console.log("user");
+//     } else { 
+//         console.log("none");
+//     }
+// });
