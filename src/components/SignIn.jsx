@@ -2,44 +2,59 @@ import React from 'react';
 import { createRef } from 'react';
 
 import { useState } from "react";
-
 import { initializeApp } from 'firebase/app';
+import auth from "../index.js"
 
 import { 
   getAuth,
   signInWithEmailAndPassword
 } from 'firebase/auth';
 
-const firebaseApp = initializeApp ({
-  apiKey: "AIzaSyCAUd7eHodqA4wO4MVZCjp3Y3I9OVDu_Mo",
-  authDomain: "cool-places-84e55.firebaseapp.com",
-  projectId: "cool-places-84e55",
-  storageBucket: "cool-places-84e55.firebasestorage.app",
-  messagingSenderId: "568081727341",
-  appId: "1:568081727341:web:f1fb2f4a13b53e008b2464"
-});
+// const firebaseApp = initializeApp ({
+//   apiKey: "AIzaSyCAUd7eHodqA4wO4MVZCjp3Y3I9OVDu_Mo",
+//   authDomain: "cool-places-84e55.firebaseapp.com",
+//   projectId: "cool-places-84e55",
+//   storageBucket: "cool-places-84e55.firebasestorage.app",
+//   messagingSenderId: "568081727341",
+//   appId: "1:568081727341:web:f1fb2f4a13b53e008b2464"
+// });
 
-const auth = getAuth(firebaseApp);
+// const auth = getAuth(firebaseApp);
 
-export default function SignIn() {
+export default function SignIn({ onDisplayStart, onDisplayStartSub }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [submittedData, setSubmittedData] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async () => {
     setSubmittedData({ email, password });
     try{
       await signInWithEmailAndPassword(auth, email, password)
+      //handleStartScreen();
       console.log('Submitted:', email, password);
+     
     } catch (error) {
-      console.error("log in failed", error.code, error.message);
+      setErrorMessage("Wrong e-mail or password, try again");
+      //console.("Failed:", error.code, error.message);
     }
    
   };
 
+  // useEffect(() => {
+    
+  
+  
+  // });
+  //   }, [error_message])
+
+
+  //const handleStartScreen = () => {onDisplayStart(false)}
+  //HERE!!
+  const handleStartSubScreen = () => {onDisplayStartSub(false)}
+
   return (
     <>
-    
     <h1>
     Sign In
     </h1>
@@ -63,6 +78,10 @@ export default function SignIn() {
 
     <button onClick={handleSubmit}>Log in</button>
 
+    <button onClick={handleStartSubScreen}>Sign Up</button>
+
+    <p>{errorMessage}</p>
+
     {submittedData && (
         <div>
           <p><strong>Email:</strong> {submittedData.email}</p>
@@ -70,7 +89,8 @@ export default function SignIn() {
         </div>
       )}
 
-
     </>
   );
 }
+
+//<button onClick={handleStartScreen}>Sign Up</button>

@@ -7,7 +7,7 @@ import { useState } from "react";
 import '../App.css'
 //const [curStart, setCurStart] = useState(SignIn);
 
-export default function StartScreen() {
+export default function StartScreen({ onDisplayStart }) {
 
 const [isSignIn, setIsSignIn] = useState(true);
 
@@ -15,10 +15,9 @@ const [isSignIn, setIsSignIn] = useState(true);
     <>
     <div class="overlay">
     <div class="box">
-      {isSignIn ? <SignIn/> : <SignUp/>}
+      {isSignIn ? <SignIn onDisplayStartSub={setIsSignIn} onDisplayStart={onDisplayStart}/> : <SignUp onDisplayStartSub={setIsSignIn} onDisplayStart={onDisplayStart}/>}
     </div>
     </div>
     </>
   );
 }
-
