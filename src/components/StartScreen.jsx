@@ -5,7 +5,6 @@ import SignUp from "./SignUp.jsx"
 import { useState } from "react";
 
 import '../App.css'
-//const [curStart, setCurStart] = useState(SignIn);
 
 export default function StartScreen({ onDisplayStart }) {
 

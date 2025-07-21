@@ -1,7 +1,12 @@
 # Cool-Places2
 
-# Cool-Places
-# Cool-Places
-# Cool-Places
-# Cool-Places
-# Cool-Places
+Using webpack to bundle files
+
+using google firebase for local hosting
+
+to start the project:
+
+npx firebase
+firebase serve
+
+you may have to install and initalize firebase

@@ -1,25 +1,10 @@
 import React from 'react';
-import { createRef } from 'react';
-
 import { useState } from "react";
-import { initializeApp } from 'firebase/app';
 import auth from "../index.js"
 
 import { 
-  getAuth,
   signInWithEmailAndPassword
 } from 'firebase/auth';
-
-// const firebaseApp = initializeApp ({
-//   apiKey: "AIzaSyCAUd7eHodqA4wO4MVZCjp3Y3I9OVDu_Mo",
-//   authDomain: "cool-places-84e55.firebaseapp.com",
-//   projectId: "cool-places-84e55",
-//   storageBucket: "cool-places-84e55.firebasestorage.app",
-//   messagingSenderId: "568081727341",
-//   appId: "1:568081727341:web:f1fb2f4a13b53e008b2464"
-// });
-
-// const auth = getAuth(firebaseApp);
 
 export default function SignIn({ onDisplayStart, onDisplayStartSub }) {
   const [email, setEmail] = useState('');
@@ -30,27 +15,15 @@ export default function SignIn({ onDisplayStart, onDisplayStartSub }) {
   const handleSubmit = async () => {
     setSubmittedData({ email, password });
     try{
-      await signInWithEmailAndPassword(auth, email, password)
-      //handleStartScreen();
+      await signInWithEmailAndPassword(auth, email, password);
       console.log('Submitted:', email, password);
      
     } catch (error) {
       setErrorMessage("Wrong e-mail or password, try again");
       //console.("Failed:", error.code, error.message);
     }
-   
   };
 
-  // useEffect(() => {
-    
-  
-  
-  // });
-  //   }, [error_message])
-
-
-  //const handleStartScreen = () => {onDisplayStart(false)}
-  //HERE!!
   const handleStartSubScreen = () => {onDisplayStartSub(false)}
 
   return (
@@ -82,15 +55,6 @@ export default function SignIn({ onDisplayStart, onDisplayStartSub }) {
 
     <p>{errorMessage}</p>
 
-    {submittedData && (
-        <div>
-          <p><strong>Email:</strong> {submittedData.email}</p>
-          <p><strong>Password:</strong> {submittedData.password}</p>
-        </div>
-      )}
-
     </>
   );
 }
-
-//<button onClick={handleStartScreen}>Sign Up</button>

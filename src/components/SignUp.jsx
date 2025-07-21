@@ -68,22 +68,14 @@ export default function SignUp({ onDisplayStart, onDisplayStartSub }) {
       />
 
     <div>Comfirm Password</div>
-    {/* <input
-        type="password"
-        placeholder="Enter password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      /> */}
 
     <div>Username</div>
+    
     <input type="text" ></input>
-
 
     <button onClick={createAccount}>Sign Up</button>
 
     <button onClick={handleStartSubScreen} >Sign In</button>
-
-
       
     </>
   );
