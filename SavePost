@@ -1,0 +1,72 @@
+import React, { useEffect } from 'react';
+import { useState } from "react";
+import {useParams, BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { store } from "../index.js"
+// import { useParams } from "react-router-dom";
+
+
+
+import '../App.css'
+
+// edit firestore elements of the post here from here
+
+export default function Post({ content, isPost, url, isPostDelete }){
+    const [postDisc, setPostDisc] = useState(content.postDisc);
+    //here
+    const [imageUrl, setImageUrl] = useState(null);
+
+    const { id } = useParams();
+
+
+    useEffect(() => {
+        isPost(true);
+
+    }, []);
+
+    function handleExit(){
+        isPost(false);
+    }
+
+    function handleDelete(){
+        isPost(false);
+    }
+
+    const handleFileChange = async (e) => {
+        const file = e.target.files[0];
+        if(!file){
+            return;
+        }
+
+        
+
+        // console.log("img idd ", id);
+        // console.log("post disc ", postDisc);
+        const fileRef = ref(store, "images/" + content.url);
+        await uploadBytes(fileRef, file);
+        const url = await getDownloadURL(fileRef);
+        setImageUrl(url);
+    }
+
+
+
+
+    return(
+    <>
+    <div className="post-box">
+    <p>{postDisc}</p>
+        <input type="file" onChange={handleFileChange} accept="image/*" />
+
+        <Link to="/" >
+        <button onClick={handleExit} style={{ pointerEvenets:"auto" }}>X</button>
+        </Link>
+
+         <button onClick={isPostDelete} style={{ pointerEvenets:"auto" }}>delete post</button>
+         {imageUrl && <img src={imageUrl} alt="uploaded" className="max-w-xs" />}
+    </div>
+    </>
+
+
+    );
+
+}

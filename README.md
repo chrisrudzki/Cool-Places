@@ -6,6 +6,8 @@ using google firebase for local hosting
 
 to start the project:
 
+npm install firebase
+
 npx firebase
 firebase serve
 

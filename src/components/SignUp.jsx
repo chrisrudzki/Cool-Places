@@ -1,7 +1,11 @@
 import React from 'react';
 import { useState } from "react";
-import auth from "../index.js"
+import { auth, Firestore } from "../index.js";
 
+import { getFirestore, doc, setDoc, collection, addDoc } from "firebase/firestore";
+
+
+//auth
 import { 
   getAuth,
   createUserWithEmailAndPassword,
@@ -15,7 +19,6 @@ export default function SignUp({ onDisplayStart, onDisplayStartSub }) {
   const [submittedData, setSubmittedData] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   
-
   const createAccount = async () => {
     setSubmittedData({ email, password });
     try {
@@ -26,7 +29,8 @@ export default function SignUp({ onDisplayStart, onDisplayStartSub }) {
       const rawMessage = error?.message ? String(error.message) : String(error);
       const match = rawMessage.match(/^Firebase:\s*(.+?)\s*\(/);
       const cleanMessage = match ? match[1] : rawMessage;
-      console.log("Failure:", cleanMessage);
+      console.log("Failure:", cleanMessage, email, password);
+
     }
   };
 
@@ -44,38 +48,169 @@ export default function SignUp({ onDisplayStart, onDisplayStartSub }) {
     });
   }
 
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  const submitUser = async () => {
+
+    await sleep(1000); 
+
+    if (!auth.currentUser){
+      console.error("ERROR!");
+      return;
+    }
+
+    try {
+    await setDoc(doc(Firestore, "users", auth.currentUser.uid), {
+      email: email,
+      username: "douglas",
+      born: 1811115
+    });
+    
+    console.log("Document written with ID: ", auth.currentUser);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
+  }
+
   return (
     <>
-    
-    <h1>
-    Sign Up
+
+    <button 
+    class="log-screen-button"
+    onClick={handleStartSubScreen} >Sign In</button>
+
+    <h1 style={{
+      fontFamily: "Arial"}}>
+    Sign up
     </h1>
 
-    <div>Email</div>
+    <div class="sign-in-inner-box-config">
+    <div class="sign-in-inner-box">
+
+    <div
+    style={{
+        fontSize: "15px",
+         textAlign: "left",
+         fontFamily: "Arial"
+        }}
+        >Email</div>
     <input
         type="email"
-        placeholder="Enter email"
+        placeholder=" "
+        style={{
+          paddingRight: "7px",
+          paddingLeft: "7px",
+          width: "100%",
+          height: "24px",
+          borderRadius: "1",  // makes corners perfectly square
+          border: "none",
+          outline: "none",
+          paddingTop: "5px",
+          paddingBottom: "5px",
+          marginTop: "2px",
+          marginBottom: "7px",
+          fontWeight: "bold",
+          boxSizing: "border-box"}}
+        
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
 
-    <div>Password</div>
+    <div
+    style={{
+        fontSize: "15px",
+         textAlign: "left",
+         fontFamily: "Arial"
+        }}
+    >Username</div>
+    <input
+        
+        placeholder=" "
+        style={{
+          paddingRight: "7px",
+          paddingLeft: "7px",
+          width: "100%",
+          height: "24px",
+          borderRadius: "1",  // makes corners perfectly square
+          border: "none",
+          outline: "none",
+          paddingTop: "5px",
+          paddingBottom: "5px",
+          marginTop: "2px",
+          marginBottom: "7px",
+          fontWeight: "bold",
+          boxSizing: "border-box"
+        }}
+      />
+
+    <div 
+    style={{
+        fontSize: "15px",
+         textAlign: "left",
+         fontFamily: "Arial"
+        }}>Password</div>
     <input
         type="password"
-        placeholder="Enter password"
+        placeholder=" "
+        style={{
+          paddingRight: "7px",
+          paddingLeft: "7px",
+          width: "100%",
+          height: "24px",
+          borderRadius: "1",  // makes corners perfectly square
+          border: "none",
+          outline: "none",
+          paddingTop: "5px",
+          paddingBottom: "5px",
+          marginTop: "2px",
+          marginBottom: "7px",
+          fontWeight: "bold",
+          boxSizing: "border-box"
+        }}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
 
-    <div>Comfirm Password</div>
+    <div
+    style={{
+        fontSize: "15px",
+         textAlign: "left",
+         fontFamily: "Arial"
+        }}
+    >Comfirm Password</div>
 
-    <div>Username</div>
-    
-    <input type="text" ></input>
+    <input 
+    style={{
+          paddingRight: "7px",
+          paddingLeft: "7px",
+          width: "100%",
+          height: "24px",
+          borderRadius: "1",  // makes corners perfectly square
+          border: "none",
+          outline: "none",
+          paddingTop: "5px",
+          paddingBottom: "5px",
+          marginTop: "2px",
+          marginBottom: "7px",
+          fontWeight: "bold",
+          boxSizing: "border-box"
+        }}
+        type="text" ></input>
 
-    <button onClick={createAccount}>Sign Up</button>
+    <button 
+    style={{
+      width: "100%",
+      marginTop: "20px"
+    }}
+    class="log-screen-button"
+    onClick={() => {createAccount(); submitUser();}}>Sign Up</button>
 
-    <button onClick={handleStartSubScreen} >Sign In</button>
+
+    </div>
+    </div>
       
     </>
   );

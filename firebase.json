@@ -8,6 +8,10 @@
     },
     "ui": {
       "enabled": true
+    },
+    "singleProjectMode": true,
+    "dataconnect": {
+      "dataDir": "dataconnect/.dataconnect/pgliteData"
     }
   },
   "hosting": {
@@ -17,5 +21,8 @@
       "**/.*",
       "**/node_modules/**"
     ]
+  },
+  "dataconnect": {
+    "source": "dataconnect"
   }
 }
