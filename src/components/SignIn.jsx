@@ -133,9 +133,6 @@ export default function SignIn({ onDisplayStart, onDisplayStartSub }) {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-  
-
-    
     <button style={{
     all: "unset",
     fontFamily: "Arial",   

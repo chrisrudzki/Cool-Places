@@ -174,6 +174,7 @@ export default function SignUp({ onDisplayStart, onDisplayStartSub }) {
         onChange={(e) => setPassword(e.target.value)}
       />
 
+
     <div
     style={{
         fontSize: "15px",
@@ -183,6 +184,8 @@ export default function SignUp({ onDisplayStart, onDisplayStartSub }) {
     >Comfirm Password</div>
 
     <input 
+        type="password"
+        placeholder=" "
     style={{
           paddingRight: "7px",
           paddingLeft: "7px",
@@ -198,7 +201,10 @@ export default function SignUp({ onDisplayStart, onDisplayStartSub }) {
           fontWeight: "bold",
           boxSizing: "border-box"
         }}
-        type="text" ></input>
+        ></input>
+
+
+
 
     <button 
     style={{

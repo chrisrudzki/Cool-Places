@@ -66,10 +66,8 @@ export default function App() {
             postUser: auth.currentUser.uid,
             postDisc: "caption",
             photos: []
-              
           });
 
-        
             // console.log("Document written ");
           } catch (e) {
             console.error("Error adding document: ", e);
@@ -147,7 +145,6 @@ export default function App() {
       console.log(curCanPost);
     }
 
-    
     async function getDocData(docRef){ 
       const result = await docRef;
       // console.log("result id : " + result.id);
@@ -185,11 +182,11 @@ export default function App() {
     }, []);
 
 
-    useEffect(() => {
-      // console.log("posts updated:", allPosts);
-      // console.log("all posts length:", allPosts.length);
+    // useEffect(() => {
+    //   // console.log("posts updated:", allPosts);
+    //   // console.log("all posts length:", allPosts.length);
 
-    }, [allPosts]);
+    // }, [allPosts]);
 
  useEffect(() => {                                                   
       if (!mapRef.current) return;
@@ -244,15 +241,12 @@ export default function App() {
 
         <div className="overlay-post" style={{ pointerEvents: inPost ? "auto" : "none" }}>
         <Routes>
-         
-
-
+    
           {
           allPosts.map( Post => (
             Post
           ))
           }
-          
           
         </Routes>
         </div>

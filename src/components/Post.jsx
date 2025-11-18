@@ -15,7 +15,7 @@ export default function Post({ content, isPost, postId, isPostDelete }){
     const storage = getStorage();
     
     const [imageUrl, setImageUrl] = useState(null);
-    const [posts, setPosts] = useState([]);
+    // const [posts, setPosts] = useState([]);
 
     const [text, setText] = useState(content.postDisc);
     const [editing, setEditing] = useState(false);
@@ -36,58 +36,47 @@ export default function Post({ content, isPost, postId, isPostDelete }){
         isPost(false);
     }
 
-   useEffect (() => {
+//    useEffect (() => {
 
-         const updatePosts = async () => {
-        // console.log("post id: " + postId);
+//          const updatePosts = async () => {
+       
+//         const postRef = doc(Firestore, "posts", postId);
 
-        // console.log("test array:" + content.photos);
+//         const docSnap = await getDoc(postRef);
 
-        // const fileRef = ref(store, "/" + postId);
-        // console.log("test:" + fileRef);
+//         const data = docSnap.data();
 
-        const postRef = doc(Firestore, "posts", postId);
+//         setPosts(data.photos);
 
-        const docSnap = await getDoc(postRef);
+//          }
 
-        const data = docSnap.data();
+//     updatePosts();
 
-        setPosts(data.photos);
+//     }, []);
 
-         }
+    // const handleFileChange = async (e) => {
+    //     const file = e.target.files[0];
 
-    updatePosts();
+    //     if(!file){
+    //         return;
+    //     }
 
-    }, []);
+    //     const fileRef = ref(store, "/" + postId);
+    //     await uploadBytes(fileRef, file);
+    //     const url = await getDownloadURL(fileRef);
+    //     setImageUrl(url);
 
+    //     const postRef = doc(Firestore, "posts", postId);
+    //     await updateDoc(postRef, {
+    //         photos: arrayUnion(url)
+    //     });
 
-   
+    //     const docSnap = await getDoc(postRef);
 
-
-    const handleFileChange = async (e) => {
-        const file = e.target.files[0];
-
-        if(!file){
-            return;
-        }
-
-        
-        const fileRef = ref(store, "/" + postId);
-        await uploadBytes(fileRef, file);
-        const url = await getDownloadURL(fileRef);
-        setImageUrl(url);
-
-        const postRef = doc(Firestore, "posts", postId);
-        await updateDoc(postRef, {
-            photos: arrayUnion(url)
-        });
-
-        const docSnap = await getDoc(postRef);
-
-        const data = docSnap.data();
-        setPosts(data?.photos || []);  // safe default if undefined
-        console.log("photo in: ", data?.photos);
-    }
+    //     const data = docSnap.data();
+    //     setPosts(data?.photos || []);  // safe default if undefined
+    //     console.log("photo in: ", data?.photos);
+    // }
 
     function handleText(newText){
         const handleTextChange = async (e) => {
@@ -112,8 +101,10 @@ export default function Post({ content, isPost, postId, isPostDelete }){
 
     <div className="post-box">
 
+        {/* 
         {posts[0] ? (undefined) : (<input type="file" onChange={handleFileChange} accept="image/*"/>)}
-       
+        */}
+
          <button onClick={isPostDelete} style={{ pointerEvenets:"auto" }}>delete post</button>
 
          <Link to="/" >
@@ -123,7 +114,7 @@ export default function Post({ content, isPost, postId, isPostDelete }){
             <div class="post-inner-box-config">
             <div class="post-inner-box">
 
-            {posts?.map(url => <img src={url} />)}
+            {/* {posts?.map(url => <img src={url} />)} */}
 
             {/* <p>{postDisc}</p> */}
 
